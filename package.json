@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installServer": "cd strapi && npm ci && echo 'strapi modules installed successfully'",
+    "runServerDev": "cd strapi && npm run develop",
+    "runServerProd": "cd strapi && npm run build && npm run start "
   },
   "repository": {
     "type": "git",

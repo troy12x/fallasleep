@@ -1,0 +1,1 @@
+// For now we are using the strapi dashboard and database, so the server is the strapi server at this moment
