@@ -1,0 +1,11 @@
+node_modules
+server/node_modules
+www/node_modules
+
+.env
+server/.env
+www/.env
+www/.env.local
+www/.end.development
+
+.vscode
