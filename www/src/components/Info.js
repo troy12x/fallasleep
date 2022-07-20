@@ -5,7 +5,7 @@ import imagex from '../assets/elp.png'
 const Info = () => {
   return (
      <div>
-     <img style={{position:'fixed',bottom:'0',marginBottom:'50px'}}src={imagex}/>
+     <img style={{position:'fixed',bottom:'0',marginBottom:'50px', pointerEvents: "none"}}src={imagex}/>
 
      <div className='w-100 py-3 px-lg-5 px-3'>
      <div className='d-flex justify-content-between'>
