@@ -1,10 +1,30 @@
 import video from "../assets/image.webp";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useStoreActions } from "easy-peasy";
 
 const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const navigate = useNavigate();
+  const onLoginAction = useStoreActions((actions) => actions.onLogin);
+
+  const sessionToken = localStorage.sessionToken;
+
+  if (sessionToken) {
+    fetch("http://localhost:1337/api/users/me", {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${sessionToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((user) => {
+        onLoginAction(user);
+        navigate("/");
+      });
+  }
 
   const top = {
     marginTop: "7rem",

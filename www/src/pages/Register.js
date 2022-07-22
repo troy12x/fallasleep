@@ -1,11 +1,14 @@
 import video from "../assets/image.webp";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { useStoreActions } from "easy-peasy";
 
 const Register = () => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const onLoginAction = useStoreActions((actions) => actions.onLogin);
+  const navigate = useNavigate();
 
   const body = {
     background: "#fff",
@@ -41,6 +44,8 @@ const Register = () => {
 
     if (res.data.jwt) {
       localStorage.sessionToken = res.data.jwt;
+      onLoginAction(res.data.user);
+      navigate("/");
     }
   };
 

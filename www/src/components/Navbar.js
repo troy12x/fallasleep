@@ -1,19 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRightFromBracket, faBell } from '@fortawesome/free-solid-svg-icons';
-import { faHome}  from '@fortawesome/free-solid-svg-icons';
-import { faMessage}  from '@fortawesome/free-solid-svg-icons';
-import {faUser} from '@fortawesome/free-solid-svg-icons';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowRightFromBracket,
+  faBell,
+} from "@fortawesome/free-solid-svg-icons";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faMessage } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useStoreState } from "easy-peasy";
 
 const Navbar = () => {
-  
-    const mystyle = {
-        fontSize:"25px"
-        };
-    return (
-        <div>
-            <style>{"\
+  const user = useStoreState((state) => state.user);
+
+  const userIsLoggedIn = Boolean(Object.keys(user).length);
+
+  const mystyle = {
+    fontSize: "25px",
+  };
+  return (
+    <div>
+      <style>
+        {
+          "\
         @media screen and (max-width: 991px){\
         #chat2{\
             display:none\
@@ -59,84 +68,98 @@ const Navbar = () => {
             color:rgb(26, 243, 30)\
         }\
     "
-    }</style>
-    <nav class="navbar navbar-expand-lg navbar-light bg_main">
-    <div class="container-fluid px-4 px-md-5">
-      <a class="navbar-brand" href="./">FALL A SLEEP</a>
-      <button
-        class="Navbar_Toggle"
-        type="button"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        id="ToggleNav"
-      >
-        <div></div>
-      </button>
-      <div id="navbar_collapse" class="navbar-collapse visibility_hidden">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="#hero">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#How_It_Works">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#Rows">Membership</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#download_app">Download </a>
+        }
+      </style>
+      <nav class="navbar navbar-expand-lg navbar-light bg_main">
+        <div class="container-fluid px-4 px-md-5">
+          <a class="navbar-brand" href="./">
+            FALL A SLEEP
+          </a>
+          <button
+            class="Navbar_Toggle"
+            type="button"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            id="ToggleNav"
+          >
+            <div></div>
+          </button>
+          <div id="navbar_collapse" class="navbar-collapse visibility_hidden">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="#hero">
+                  Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#How_It_Works">
+                  About
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#Rows">
+                  Membership
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#download_app">
+                  Download{" "}
+                </a>
+              </li>
+            </ul>
+            <div className="d-flex align-items-center gap-3">
+              {!userIsLoggedIn && (
+                <>
+                  <a style={{ fontSize: "19px", color: "#fff" }} href="/login">
+                    Sign in
+                  </a>
+                  <a id="btn_Download" href="/register" class="au">
+                    <button class="btn btn_download">Sign up</button>
+                  </a>
+                </>
+              )}
+              <a id="btn_Download" href="/start" class="au">
+                <button class="btn btn_download">Start</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div className="navbar_mobile  ">
+        <ul className="items">
+          <a href="/feed" className="au  ">
+            <li style={{ fontSize: "26px" }}>
+              <FontAwesomeIcon id="house" icon={faHome} />
+            </li>
+          </a>
+          <li style={{ fontSize: "26px" }}>
+            <a href="/chat" id="chat" className="au">
+              <FontAwesomeIcon icon={faMessage} />
+            </a>
           </li>
         </ul>
-        <div className='d-flex align-items-center gap-3'>
-        <a style={{fontSize:'19px',color:'#fff'}} href="/login">
-         Sign in
+        <a href="/upload">
+          <button className="btn_createPost" style={{ fontSize: "1.2rem" }}>
+            Upload
+          </button>
         </a>
-        <a id="btn_Download" href="/register" class="au">
-          <button class="btn btn_download">Sign up</button>
-        </a>
-        <a id="btn_Download" href="/start" class="au">
-        <button class="btn btn_download">Start</button>
-      </a>
-        </div>
-      
+        <ul className="items">
+          <a href="/notifications" id="noti" className="au">
+            <li style={{ fontSize: "26px" }}>
+              <FontAwesomeIcon icon={faBell} />
+            </li>
+          </a>
+          <a href="/profile" id="profile" className="au">
+            <li style={{ fontSize: "26px" }}>
+              {" "}
+              <FontAwesomeIcon icon={faUser} />
+            </li>
+          </a>
+        </ul>
       </div>
     </div>
-  </nav>
-      
-         <div className="navbar_mobile  ">
-    <ul className="items">
-        <a href="/feed"  className="au  " >
-        <li style={{fontSize:"26px"}}><FontAwesomeIcon id='house' icon={faHome} /></li>
-        </a>
-        <li style={{fontSize:"26px"}}>
-        <a href="/chat" id="chat" className="au"><FontAwesomeIcon icon={faMessage} /></a>
-        </li>
+  );
+};
 
-    </ul>
-    <a href="/upload">
-        <button className="btn_createPost" style={{fontSize:"1.2rem"}}>
-        Upload
-        </button>
-    </a>
-    <ul className="items">
-
-        <a href="/notifications" id="noti" className="au">
-        <li style={{fontSize:"26px"}}>
-
-        <FontAwesomeIcon  icon={faBell} />
-
-        </li>
-        </a>
-        <a href="/profile" id="profile" className="au">
-        <li style={{fontSize:"26px"}}>      <FontAwesomeIcon  icon={faUser} /></li>
-        </a>
-
-    </ul>
-    </div>
-       
-
-        </div>
-    )
-}
-
-export default Navbar
+export default Navbar;
